@@ -13,9 +13,16 @@ import retrofit2.Response
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
+    private val gymAdapter by lazy { GymAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        binding.rvGym.run {
+            this.adapter = gymAdapter
+        }
+
 
         binding.btnSearch.setOnClickListener {
             startSearch(binding.etInput.text.toString())
@@ -31,9 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     response: Response<SearchResponse>
                 ) {
                     Log.d("결과(성공) - 총갯수 : ", response.body()?.items?.size.toString())
-                    response.body()?.items?.forEach {
-                        Log.d("결과(성공) - ", it.title)
-                    }
+                    response.body()?.items?.let { gymAdapter.getItemList(it) }
                 }
 
                 override fun onFailure(call: Call<SearchResponse>, t: Throwable) {

@@ -1,6 +1,6 @@
 package com.example.aroundgym.data.api
 
-import com.example.aroundgym.data.model.SearchResponse
+import com.example.aroundgym.data.model.naver.SearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header

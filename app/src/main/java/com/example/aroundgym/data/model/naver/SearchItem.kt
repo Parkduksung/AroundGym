@@ -1,4 +1,4 @@
-package com.example.aroundgym.data.model
+package com.example.aroundgym.data.model.naver
 
 import com.google.gson.annotations.SerializedName
 

@@ -4,10 +4,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object Retrofit {
-    private const val BASE_URL = "https://openapi.naver.com/"
-    fun builder(): Retrofit =
+    const val NAVER_BASE_URL = "https://openapi.naver.com/"
+    const val KAKAO_BASE_URL = "https://dapi.kakao.com/"
+    fun builder(baseUrl: String): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 }

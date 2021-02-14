@@ -2,7 +2,6 @@ package com.example.aroundgym.presenter
 
 import android.content.Intent
 import android.os.Bundle
-import com.example.aroundgym.MainActivity
 import com.example.aroundgym.R
 import com.example.aroundgym.base.BaseActivity
 import com.example.aroundgym.databinding.ActivityIntroBinding
@@ -16,7 +15,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
 
         GlobalScope.launch {
             delay(1500)
-            startActivity(Intent(this@IntroActivity, MainActivity::class.java))
+            startActivity(Intent(this@IntroActivity, GymActivity::class.java))
         }
     }
 }

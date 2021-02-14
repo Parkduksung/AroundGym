@@ -1,7 +1,9 @@
-package com.example.aroundgym
+package com.example.aroundgym.presenter
 
 import android.os.Bundle
 import android.util.Log
+import com.example.aroundgym.GymAdapter
+import com.example.aroundgym.R
 import com.example.aroundgym.base.BaseActivity
 import com.example.aroundgym.data.api.KakaoApi
 import com.example.aroundgym.data.api.NaverApi
@@ -15,7 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+class GymActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val gymAdapter by lazy { GymAdapter() }
 

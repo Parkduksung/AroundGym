@@ -6,13 +6,11 @@ import com.example.aroundgym.GymAdapter
 import com.example.aroundgym.R
 import com.example.aroundgym.base.BaseActivity
 import com.example.aroundgym.data.api.KakaoApi
-import com.example.aroundgym.data.api.NaverApi
 import com.example.aroundgym.data.model.kakao.KakaoResponse
-import com.example.aroundgym.data.model.naver.SearchResponse
 import com.example.aroundgym.databinding.ActivityMainBinding
 import com.example.aroundgym.util.Retrofit
 import com.example.aroundgym.util.Retrofit.KAKAO_BASE_URL
-import com.example.aroundgym.util.Retrofit.NAVER_BASE_URL
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +18,8 @@ import retrofit2.Response
 class GymActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val gymAdapter by lazy { GymAdapter() }
+
+    private val gymViewModel by viewModel<GymViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,31 +29,16 @@ class GymActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             this.adapter = gymAdapter
         }
 
+        binding.run {
+            viewModel = gymViewModel
+            lifecycleOwner = this@GymActivity
+        }
 
         binding.btnSearch.setOnClickListener {
             startKakaoSearch(binding.etInput.text.toString())
         }
 
     }
-
-    private fun startNaverSearch(search: String) {
-        Retrofit.builder(baseUrl = NAVER_BASE_URL).create(NaverApi::class.java)
-            .search(search = search, count = 5)
-            .enqueue(object : Callback<SearchResponse> {
-                override fun onResponse(
-                    call: Call<SearchResponse>,
-                    response: Response<SearchResponse>
-                ) {
-                    Log.d("결과(성공) - 총갯수 : ", response.body()?.items?.size.toString())
-                    response.body()?.items?.let { gymAdapter.getItemList(it) }
-                }
-
-                override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
-                    Log.d("결과(실패) - 총갯수 : ", t.message.toString())
-                }
-            })
-    }
-
 
     private fun startKakaoSearch(searchKeyword: String) {
         Retrofit.builder(baseUrl = KAKAO_BASE_URL).create(KakaoApi::class.java)

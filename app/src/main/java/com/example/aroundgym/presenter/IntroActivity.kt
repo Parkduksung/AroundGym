@@ -7,6 +7,7 @@ import com.example.aroundgym.MainActivity
 import com.example.aroundgym.R
 import com.example.aroundgym.base.BaseActivity
 import com.example.aroundgym.databinding.ActivityIntroBinding
+import com.example.aroundgym.util.ImageUtils
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -17,10 +18,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
 
         GlobalScope.launch {
             binding.image.startAnimation(
-                AnimationUtils.loadAnimation(
-                    this@IntroActivity,
-                    R.anim.animation_blink
-                )
+                ImageUtils.blinkAnimation(duration = 400L)
             )
             delay(3000)
             startActivity(Intent(this@IntroActivity, MainActivity::class.java))

@@ -3,8 +3,6 @@ package com.example.aroundgym.presenter
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.animation.AnimationUtils
-import com.example.aroundgym.GymActivity
 import com.example.aroundgym.R
 import com.example.aroundgym.base.BaseActivity
 import com.example.aroundgym.databinding.ActivityIntroBinding
@@ -24,6 +22,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
             )
             delay(3000)
             startActivity(Intent(this@IntroActivity, GymActivity::class.java))
+            this@IntroActivity.finish()
         }
 
     }

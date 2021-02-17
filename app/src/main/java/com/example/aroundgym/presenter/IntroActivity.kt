@@ -4,7 +4,7 @@ package com.example.aroundgym.presenter
 import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
-import com.example.aroundgym.MainActivity
+import com.example.aroundgym.GymActivity
 import com.example.aroundgym.R
 import com.example.aroundgym.base.BaseActivity
 import com.example.aroundgym.databinding.ActivityIntroBinding
@@ -23,7 +23,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
                 ImageUtils.blinkAnimation(duration = 400L)
             )
             delay(3000)
-            startActivity(Intent(this@IntroActivity, MainActivity::class.java))
+            startActivity(Intent(this@IntroActivity, GymActivity::class.java))
         }
 
     }

@@ -17,7 +17,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
         super.onCreate(savedInstanceState)
 
         GlobalScope.launch {
-            binding.image.startAnimation(
+            binding.intro.startAnimation(
                 ImageUtils.blinkAnimation(duration = 400L)
             )
             delay(3000)

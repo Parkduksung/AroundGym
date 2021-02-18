@@ -13,7 +13,7 @@
 
         <ImageView
             android:src="@drawable/ic_launcher_foreground"
-            android:id="@+id/image"
+            android:id="@+id/intro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

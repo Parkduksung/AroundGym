@@ -7,11 +7,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class KakaoRepositoryImpl : KakaoRepository {
+class KakaoRepositoryImpl(private val kakaoRemoteDataSource: KakaoRemoteDataSource) :
+    KakaoRepository {
     override fun search(keyword: String, callback: (list: List<KakaoSearchItem>) -> Unit) {
-        com.example.aroundgym.util.Retrofit.builder(baseUrl = com.example.aroundgym.util.Retrofit.KAKAO_BASE_URL)
-            .create(KakaoApi::class.java)
-            .search(keyword = keyword)
+        kakaoRemoteDataSource.search(keyword, callback)
+    }
+}
+
+class KakaoRemoteDataSourceImpl(private val kakaoApi: KakaoApi) : KakaoRemoteDataSource {
+    override fun search(keyword: String, callback: (list: List<KakaoSearchItem>) -> Unit) {
+        kakaoApi.search(keyword = keyword)
             .enqueue(object : Callback<KakaoResponse> {
                 override fun onResponse(
                     call: Call<KakaoResponse>,

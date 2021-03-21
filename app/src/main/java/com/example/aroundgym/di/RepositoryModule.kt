@@ -5,5 +5,5 @@ import com.example.aroundgym.data.repo.KakaoRepositoryImpl
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single<KakaoRepository> { KakaoRepositoryImpl() }
+    single<KakaoRepository> { KakaoRepositoryImpl(get()) }
 }

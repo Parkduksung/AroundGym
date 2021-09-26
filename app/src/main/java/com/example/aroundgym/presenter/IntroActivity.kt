@@ -16,14 +16,5 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        GlobalScope.launch {
-            binding.intro.startAnimation(
-                ImageUtils.blinkAnimation(duration = 400L)
-            )
-            delay(3000)
-            startActivity(Intent(this@IntroActivity, GymActivity::class.java))
-            this@IntroActivity.finish()
-        }
-
     }
 }

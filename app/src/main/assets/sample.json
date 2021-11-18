@@ -1,103 +1,19 @@
 {
-  "predictions": [
+  "posts": [
     {
-      "description": "대한민국 서울특별시 송파구 신천동 올림픽로 롯데월드아쿠아리움",
-      "id": "94a959aa011123371515a64da8eab3d64ef7b920",
-      "matched_substrings": [
-        {
-          "length": 9,
-          "offset": 24
-        }
-      ],
-      "place_id": "ChIJY4ot2QqlfDURFzi2WmB3i6U",
-      "reference": "ChIJY4ot2QqlfDURFzi2WmB3i6U",
-      "structured_formatting": {
-        "main_text": "롯데월드아쿠아리움",
-        "main_text_matched_substrings": [
-          {
-            "length": 9,
-            "offset": 0
-          }
-        ],
-        "secondary_text": "대한민국 서울특별시 송파구 신천동 올림픽로"
-      },
-      "terms": [
-        {
-          "offset": 24,
-          "value": "롯데월드아쿠아리움"
-        },
-        {
-          "offset": 19,
-          "value": "올림픽로"
-        },
-        {
-          "offset": 15,
-          "value": "신천동"
-        },
-        {
-          "offset": 11,
-          "value": "송파구"
-        },
-        {
-          "offset": 5,
-          "value": "서울특별시"
-        },
-        {
-          "offset": 0,
-          "value": "대한민국"
-        }
-      ],
-      "types": [
-        "establishment"
-      ]
+      "title": "how to get stroage size",
+      "url": "https://codechacha.com/ko/get-free-and-total-size-of-volumes-in-android/",
+      "draft": false
     },
     {
-      "description": "대한민국 부산광역시 중구 중앙동7가 부산제2롯데월드현장롯데건설",
-      "id": "0d638cd75f98a349b916992540377015d4e2a60e",
-      "matched_substrings": [
-        {
-          "length": 6,
-          "offset": 22
-        }
-      ],
-      "place_id": "ChIJczH0L3PpaDUR2VSZjFe8om0",
-      "reference": "ChIJczH0L3PpaDUR2VSZjFe8om0",
-      "structured_formatting": {
-        "main_text": "부산제2롯데월드현장롯데건설",
-        "main_text_matched_substrings": [
-          {
-            "length": 6,
-            "offset": 2
-          }
-        ],
-        "secondary_text": "대한민국 부산광역시 중구 중앙동7가"
-      },
-      "terms": [
-        {
-          "offset": 20,
-          "value": "부산제2롯데월드현장롯데건설"
-        },
-        {
-          "offset": 14,
-          "value": "중앙동7가"
-        },
-        {
-          "offset": 11,
-          "value": "중구"
-        },
-        {
-          "offset": 5,
-          "value": "부산광역시"
-        },
-        {
-          "offset": 0,
-          "value": "대한민국"
-        }
-      ],
-      "types": [
-        "establishment"
-      ]
+      "title": "Android Q, Scoped Storage",
+      "url": "https://codechacha.com/ko/android-q-scoped-storage/",
+      "draft": false
+    },
+    {
+      "title": "How to parse JSON in android",
+      "url": "https://codechacha.com/ko/how-to-parse-json-in-android/",
+      "draft": true
     }
-  ],
-  "status": "OK"
+  ]
 }

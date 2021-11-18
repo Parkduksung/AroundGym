@@ -1,19 +1,49 @@
 package com.example.aroundgym
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONObject
+import java.net.URL
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
+    private lateinit var bitmap: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         getSample()
+
+        val thread = getBitmap("https://asddsa.soll0803.repl.co/kospi.PNG")
+
+        thread.start()
+
+        try {
+            thread.join()
+            findViewById<ImageView>(R.id.image).setImageBitmap(bitmap)
+        } catch (e: java.lang.Exception) {
+            null
+        }
     }
+
+    private fun getBitmap(url: String): Thread =
+        Thread {
+            try {
+                val httpURLConnection = URL(url).openConnection()
+                httpURLConnection.doInput = true
+                httpURLConnection.connect()
+                val inputStream = httpURLConnection.getInputStream()
+                bitmap = BitmapFactory.decodeStream(inputStream)
+            } catch (e: Exception) {
+                Log.d("결과", e.message.toString())
+                e.printStackTrace()
+            }
+        }
 
 
     private fun getSample() {

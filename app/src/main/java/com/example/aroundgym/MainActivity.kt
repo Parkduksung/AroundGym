@@ -34,10 +34,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun getBitmap(url: String): Thread =
         Thread {
             try {
-                val httpURLConnection = URL(url).openConnection()
-                httpURLConnection.doInput = true
-                httpURLConnection.connect()
-                val inputStream = httpURLConnection.getInputStream()
+                val inputStream = URL(url).openStream()
                 bitmap = BitmapFactory.decodeStream(inputStream)
             } catch (e: Exception) {
                 Log.d("결과", e.message.toString())

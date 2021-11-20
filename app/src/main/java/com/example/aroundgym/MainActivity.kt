@@ -17,20 +17,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        getSample()
-
-        val thread = getBitmap("https://asddsa.soll0803.repl.co/kospi.PNG")
-
-        thread.start()
-
-        try {
-            thread.join()
-            findViewById<ImageView>(R.id.image).setImageBitmap(bitmap)
-        } catch (e: java.lang.Exception) {
-            null
-        }
     }
 
+
+    //url 을 읽어 bitmap 으로 변환.
     private fun getBitmap(url: String): Thread =
         Thread {
             try {
@@ -42,7 +32,25 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
         }
 
+    //bitmap 을 imageview 에 넣기.
+    private fun setImageView() {
 
+        val thread =
+            getBitmap("https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F486985%3Ftimestamp%3D20210504151232")
+
+        thread.start()
+
+        try {
+            thread.join()
+            findViewById<ImageView>(R.id.image).setImageBitmap(bitmap)
+        } catch (e: java.lang.Exception) {
+            null
+        }
+
+
+    }
+
+    //asset 에 있는 json 읽어와 Data Class 의 list 형식으로 변환하기.
     private fun getSample() {
         val assetManager = resources.assets
         val inputStream = assetManager.open("sample.json")
@@ -61,9 +69,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             emptyPost.url = obj.getString("url")
             emptyPost.draft = obj.getString("draft")
             postList.add(emptyPost)
-        }
-        postList.forEach {
-            Log.d("결과", it.toString())
         }
     }
 

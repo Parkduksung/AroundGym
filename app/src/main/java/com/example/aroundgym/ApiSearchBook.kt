@@ -48,7 +48,8 @@ class ApiSearchBook {
 
             return if (responseCode == HttpURLConnection.HTTP_OK) {
                 val readBody = readBody(con.inputStream)
-                parseData(readBody)
+                val result = parseData(readBody)
+                result
             } else {
                 null
             }
@@ -116,6 +117,8 @@ class ApiSearchBook {
                     )
                 )
             }
+
+
             return KakaoSearchBookResponse(documents = documentList, meta = meta)
 
         } catch (e: JSONException) {

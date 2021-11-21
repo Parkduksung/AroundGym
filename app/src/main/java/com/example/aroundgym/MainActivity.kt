@@ -7,8 +7,6 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aroundgym.data.model.Document
-import com.example.aroundgym.data.repo.KAKAORepositoryImpl
-import com.example.aroundgym.data.source.KAKAORemoteDataSourceImpl
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -33,11 +31,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private val mainManager by lazy {
-        MainViewStateManager(
-            KAKAORepositoryImpl.getInstance(
-                KAKAORemoteDataSourceImpl.getInstance()
-            )
-        ).apply {
+        MainViewStateManager().apply {
             setMainViewStateListener(mainViewStateListener)
         }
     }

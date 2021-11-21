@@ -1,9 +1,11 @@
 package com.example.aroundgym
 
 import com.example.aroundgym.data.model.Document
-import com.example.aroundgym.data.repo.KAKAORepository
+import com.example.aroundgym.util.InjectUtil
 
-class MainViewStateManager(private val kakaoRepository: KAKAORepository) {
+class MainViewStateManager {
+
+    private val kakaoRepository by lazy { InjectUtil.provideKAKAORepository() }
 
     private var mainViewState: MainViewState? = null
 

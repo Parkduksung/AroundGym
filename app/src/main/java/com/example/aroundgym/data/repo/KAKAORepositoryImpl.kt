@@ -1,10 +1,11 @@
 package com.example.aroundgym.data.repo
 
 import com.example.aroundgym.data.model.KakaoSearchBookResponse
-import com.example.aroundgym.data.source.KAKAORemoteDataSource
+import com.example.aroundgym.util.InjectUtil
 
-class KAKAORepositoryImpl(private val kakaoRemoteDataSource: KAKAORemoteDataSource) :
-    KAKAORepository {
+class KAKAORepositoryImpl : KAKAORepository {
+
+    private val kakaoRemoteDataSource by lazy { InjectUtil.provideKAKAORemoteDataSource() }
 
     override fun searchBook(
         bookName: String,
@@ -22,8 +23,8 @@ class KAKAORepositoryImpl(private val kakaoRemoteDataSource: KAKAORemoteDataSour
 
         private var INSTANCE: KAKAORepository? = null
 
-        fun getInstance(kakaoRemoteDataSource: KAKAORemoteDataSource): KAKAORepository =
-            INSTANCE ?: KAKAORepositoryImpl(kakaoRemoteDataSource).also {
+        fun getInstance(): KAKAORepository =
+            INSTANCE ?: KAKAORepositoryImpl().also {
                 INSTANCE = it
             }
 

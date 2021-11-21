@@ -1,5 +1,6 @@
 package com.example.aroundgym
 
+import com.example.aroundgym.data.model.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.BufferedReader

@@ -1,11 +1,14 @@
 package com.example.aroundgym
 
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.aroundgym.data.model.Document
+import com.example.aroundgym.util.ImageUtil
 
 class BookAdapter : BaseAdapter() {
 
@@ -41,6 +44,7 @@ class BookAdapter : BaseAdapter() {
 
     fun addAll(list: List<Document>) {
         bookList.addAll(list)
+        notifyDataSetChanged()
     }
 
     fun clear() {
@@ -58,6 +62,15 @@ class BookViewHolder(itemView: View) {
     fun bind(item: Document) {
         title.text = item.title
         content.text = item.title
-        ImageUtil.setBitmapImage(item.thumbnail, image)
+        ImageUtil.setBitmapImage(item.thumbnail,
+            onSuccess = {
+                android.os.Handler(Looper.getMainLooper()).post {
+                    image.setImageBitmap(it)
+                }
+            }, onFailure = {
+                android.os.Handler(Looper.getMainLooper()).post {
+                    image.setImageResource(android.R.drawable.ic_delete)
+                }
+            })
     }
 }

@@ -23,9 +23,9 @@ class ApiSearchBook {
 
     fun search(
         bookName: String,
-        size: Int = 50,
-        sort: String = "accuracy",
-        page: Int = 1,
+        size: Int,
+        sort: String,
+        page: Int,
     ): KakaoSearchBookResponse? {
         return get(bookName, size, sort, page)
     }

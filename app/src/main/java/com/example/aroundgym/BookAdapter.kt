@@ -49,6 +49,11 @@ class BookAdapter : BaseAdapter() {
         notifyDataSetChanged()
     }
 
+    fun loadNextData(list : List<Document>){
+        bookList.addAll(list)
+        notifyDataSetChanged()
+    }
+
     fun clear() {
         bookList.clear()
         notifyDataSetChanged()

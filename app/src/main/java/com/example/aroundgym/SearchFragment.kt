@@ -2,13 +2,11 @@ package com.example.aroundgym
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.aroundgym.data.model.Document
 
@@ -22,12 +20,23 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private val buttonSearch by lazy { view?.findViewById<Button>(R.id.button_search) }
 
+    private var isLoad = false
+
     private lateinit var searchFragmentViewStateListener: SearchFragmentViewStateListener
 
     private val mainViewStateListener = object : MainViewStateManager.MainViewState {
+
         override fun search(list: List<Document>) {
             requireActivity().runOnUiThread {
                 bookAdapter.addAll(list)
+                isLoad = true
+            }
+        }
+
+        override fun loadNextData(list: List<Document>) {
+            requireActivity().runOnUiThread {
+                bookAdapter.loadNextData(list)
+                isLoad = true
             }
         }
 
@@ -36,6 +45,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     private val mainManager by lazy {
@@ -76,6 +86,24 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         bookAdapter.setOnItemClickListener {
             searchFragmentViewStateListener.routeDetail(it)
         }
+
+        bookList?.setOnScrollListener(object : AbsListView.OnScrollListener {
+            override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {}
+
+            override fun onScroll(
+                view: AbsListView?,
+                firstVisibleItem: Int,
+                visibleItemCount: Int,
+                totalItemCount: Int
+            ) {
+                val l = visibleItemCount + firstVisibleItem
+
+                if ((l >= totalItemCount) && isLoad) {
+                    mainManager.loadNextData()
+                    isLoad = false
+                }
+            }
+        })
 
         buttonSearch?.setOnClickListener {
             bookAdapter.clear()

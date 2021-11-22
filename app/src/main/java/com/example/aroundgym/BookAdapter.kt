@@ -18,6 +18,8 @@ class BookAdapter : BaseAdapter() {
 
     private lateinit var view: View
 
+    private lateinit var itemClickListener: (item: Document) -> Unit
+
     override fun getCount(): Int =
         bookList.size
 
@@ -37,7 +39,7 @@ class BookAdapter : BaseAdapter() {
             view = convertView
             bookViewHolder = view.tag as? BookViewHolder
         }
-        bookViewHolder?.bind(bookList[position])
+        bookViewHolder?.bind(bookList[position], itemClickListener)
 
         return view
     }
@@ -51,15 +53,24 @@ class BookAdapter : BaseAdapter() {
         bookList.clear()
         notifyDataSetChanged()
     }
+
+    fun setOnItemClickListener(listener: (item: Document) -> Unit) {
+        itemClickListener = listener
+    }
 }
 
-class BookViewHolder(itemView: View) {
+class BookViewHolder(private val itemView: View) {
 
     private val image: ImageView = itemView.findViewById(R.id.image)
     private val title: TextView = itemView.findViewById(R.id.title)
     private val content: TextView = itemView.findViewById(R.id.content)
 
-    fun bind(item: Document) {
+    fun bind(item: Document, listener: (item: Document) -> Unit) {
+
+        itemView.setOnClickListener {
+            listener(item)
+        }
+
         title.text = item.title
         content.text = item.title
         ImageUtil.setBitmapImage(item.thumbnail,

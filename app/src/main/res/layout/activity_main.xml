@@ -5,37 +5,9 @@
     android:layout_height="match_parent">
 
 
-    <EditText
-        android:id="@+id/et_input_book"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@null"
-        android:gravity="center"
-        android:hint="search book!"
-        android:lines="1"
-        app:layout_constraintBottom_toBottomOf="@id/button_search"
-        app:layout_constraintEnd_toStartOf="@id/button_search"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/button_search" />
-
-    <Button
-        android:id="@+id/button_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/ic_menu_search"
-        android:onClick="search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".0" />
-
-    <ListView
-        android:id="@+id/list_book"
+    <FrameLayout
+        android:id="@+id/container_main"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_search" />
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

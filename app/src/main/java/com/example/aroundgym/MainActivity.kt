@@ -11,12 +11,25 @@ import com.example.aroundgym.data.model.Document
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
+
+    private val searchFragmentViewStateListener =
+        object : SearchFragment.SearchFragmentViewStateListener {
+            override fun routeDetail(item: Document) {
+                supportFragmentManager.beginTransaction()
+                    .add(R.id.container_main, DetailFragment.newInstance(item))
+                    .addToBackStack("detail").commit()
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().add(R.id.container_main, SearchFragment())
-            .commit()
+        supportFragmentManager.beginTransaction()
+            .add(
+                R.id.container_main,
+                SearchFragment.newInstance(searchFragmentViewStateListener)
+            ).commit()
 
     }
 

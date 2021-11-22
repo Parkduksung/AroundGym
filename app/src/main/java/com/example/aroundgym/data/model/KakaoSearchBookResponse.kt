@@ -1,5 +1,7 @@
 package com.example.aroundgym.data.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -21,8 +23,52 @@ data class Document(
     val title: String,
     val translators: List<String>,
     val url: String
-)
+) : Parcelable {
 
+    constructor(parcel: Parcel) : this(
+        parcel.createStringArrayList() ?: emptyList(),
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readInt() ?: 0,
+        parcel.readString() ?: "",
+        parcel.readInt() ?: 0,
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.createStringArrayList() ?: emptyList(),
+        parcel.readString() ?: ""
+    )
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        dest?.writeStringList(authors)
+        dest?.writeString(contents)
+        dest?.writeString(datetime)
+        dest?.writeString(isbn)
+        dest?.writeInt(price)
+        dest?.writeString(publisher)
+        dest?.writeInt(sale_price)
+        dest?.writeString(status)
+        dest?.writeString(thumbnail)
+        dest?.writeString(title)
+        dest?.writeStringList(translators)
+        dest?.writeString(url)
+    }
+
+    companion object CREATOR : Parcelable.Creator<Document> {
+        override fun createFromParcel(parcel: Parcel): Document {
+            return Document(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Document?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
 
 data class Meta(
     val is_end: Boolean,

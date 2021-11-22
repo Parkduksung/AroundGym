@@ -22,6 +22,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private val buttonSearch by lazy { view?.findViewById<Button>(R.id.button_search) }
 
+    private lateinit var searchFragmentViewStateListener: SearchFragmentViewStateListener
+
     private val mainViewStateListener = object : MainViewStateManager.MainViewState {
         override fun search(list: List<Document>) {
             requireActivity().runOnUiThread {
@@ -44,6 +46,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        (context as? SearchFragmentViewStateListener)?.let {
+            searchFragmentViewStateListener = it
+        }
     }
 
     override fun onStart() {
@@ -69,7 +74,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
 
         bookAdapter.setOnItemClickListener {
-
+            searchFragmentViewStateListener.routeDetail(it)
         }
 
         buttonSearch?.setOnClickListener {
@@ -100,5 +105,18 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     override fun onDestroy() {
         super.onDestroy()
+    }
+
+    interface SearchFragmentViewStateListener {
+        fun routeDetail(item: Document)
+    }
+
+    companion object {
+
+        fun newInstance(listener: SearchFragmentViewStateListener) =
+            SearchFragment().apply {
+                searchFragmentViewStateListener = listener
+            }
+
     }
 }

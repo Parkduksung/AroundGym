@@ -13,26 +13,28 @@ class MainViewStateManager {
 
     private var lastBookName: String? = null
 
+
+    private fun initConfiguration() {
+        pageCount = 1
+        lastBookName = null
+    }
+
     fun search(
         bookName: String,
         size: Int = 50,
         sort: String = "accuracy",
-        page: Int = pageCount,
     ) {
+        initConfiguration()
         if (bookName.isNotEmpty()) {
             kakaoRepository.searchBook(
                 bookName = bookName,
                 size = size,
                 sort = sort,
-                page = page,
+                page = pageCount,
                 onSuccess = {
                     if (!it.meta.is_end) {
                         pageCount++
                         lastBookName = bookName
-                    } else {
-                        pageCount = 1
-                        lastBookName = null
-                        return@searchBook
                     }
                     mainViewState?.search(it.documents)
                 },

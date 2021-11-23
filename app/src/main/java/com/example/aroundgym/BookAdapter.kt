@@ -12,13 +12,13 @@ import com.example.aroundgym.util.ImageUtil
 
 class BookAdapter : BaseAdapter() {
 
-    private val bookList = mutableListOf<Document>()
+    private val bookList = mutableListOf<Pair<Document, Boolean>>()
 
     private var bookViewHolder: BookViewHolder? = null
 
     private lateinit var view: View
 
-    private lateinit var itemClickListener: (item: Document) -> Unit
+    private lateinit var itemClickListener: (item: Pair<Document, Boolean>) -> Unit
 
     override fun getCount(): Int =
         bookList.size
@@ -27,7 +27,7 @@ class BookAdapter : BaseAdapter() {
         position.toLong()
 
     override fun getItem(position: Int): Document =
-        bookList[position]
+        bookList[position].first
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         if (convertView == null) {
@@ -45,12 +45,18 @@ class BookAdapter : BaseAdapter() {
     }
 
     fun addAll(list: List<Document>) {
-        bookList.addAll(list)
+        bookList.addAll(list.map { Pair(it, false) })
         notifyDataSetChanged()
     }
 
-    fun loadNextData(list : List<Document>){
-        bookList.addAll(list)
+    fun loadNextData(list: List<Document>) {
+        bookList.addAll(list.map { Pair(it, false) })
+        notifyDataSetChanged()
+    }
+
+    fun like(pair: Pair<Document, Boolean>) {
+        val index = bookList.indexOf(bookList.find { it.first == pair.first })
+        bookList[index] = pair
         notifyDataSetChanged()
     }
 
@@ -59,7 +65,7 @@ class BookAdapter : BaseAdapter() {
         notifyDataSetChanged()
     }
 
-    fun setOnItemClickListener(listener: (item: Document) -> Unit) {
+    fun setOnItemClickListener(listener: (item: Pair<Document, Boolean>) -> Unit) {
         itemClickListener = listener
     }
 }
@@ -69,16 +75,23 @@ class BookViewHolder(private val itemView: View) {
     private val image: ImageView = itemView.findViewById(R.id.image)
     private val title: TextView = itemView.findViewById(R.id.title)
     private val content: TextView = itemView.findViewById(R.id.content)
+    private val bookmark: ImageView = itemView.findViewById(R.id.like)
 
-    fun bind(item: Document, listener: (item: Document) -> Unit) {
+    fun bind(item: Pair<Document, Boolean>, listener: (item: Pair<Document, Boolean>) -> Unit) {
 
         itemView.setOnClickListener {
             listener(item)
         }
 
-        title.text = item.title
-        content.text = item.title
-        ImageUtil.setBitmapImage(item.thumbnail,
+        if (item.second) {
+            bookmark.setImageResource(R.drawable.ic_like_on)
+        } else {
+            bookmark.setImageResource(R.drawable.ic_like_off)
+        }
+
+        title.text = item.first.title
+        content.text = item.first.title
+        ImageUtil.setBitmapImage(item.first.thumbnail,
             onSuccess = {
                 android.os.Handler(Looper.getMainLooper()).post {
                     image.setImageBitmap(it)

@@ -54,6 +54,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
     }
 
+    fun toggleBookmark(pair: Pair<Document,Boolean>) {
+        bookAdapter.like(pair)
+    }
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (context as? SearchFragmentViewStateListener)?.let {
@@ -136,7 +141,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     interface SearchFragmentViewStateListener {
-        fun routeDetail(item: Document)
+        fun routeDetail(item: Pair<Document, Boolean>)
     }
 
     companion object {

@@ -3,20 +3,21 @@ package com.example.aroundgym
 import android.content.Context
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.os.bundleOf
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.aroundgym.data.model.Document
 import com.example.aroundgym.util.ImageUtil
-import org.w3c.dom.Document
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
+
+    private var detailFragmentViewStateListener: DetailFragmentViewStateListener? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,7 +43,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        arguments?.getParcelable<com.example.aroundgym.data.model.Document>(KEY_ITEM)?.let { item ->
+        arguments?.getParcelable<Document>(KEY_ITEM)?.let { item ->
 
             with(item) {
 
@@ -51,6 +52,21 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 view.findViewById<TextView>(R.id.book_publish_day).text = datetime
                 view.findViewById<TextView>(R.id.book_publisher).text = publisher
                 view.findViewById<TextView>(R.id.book_detail).text = contents
+
+
+                view.findViewById<CheckBox>(R.id.cb_bookmark)
+                    .setOnCheckedChangeListener { buttonView, isChecked ->
+
+                        if (isChecked) {
+                            buttonView.background =
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_like_on)
+                        } else {
+                            buttonView.background =
+                                ContextCompat.getDrawable(requireContext(), R.drawable.ic_like_off)
+                        }
+
+                        detailFragmentViewStateListener?.toggleBookmark(Pair(item, isChecked))
+                    }
 
                 Thread {
                     ImageUtil.setBitmapImage(thumbnail,
@@ -68,9 +84,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
         }
 
+        arguments?.getBoolean(KEY_LIKE)?.let {
+            view.findViewById<CheckBox>(R.id.cb_bookmark).isChecked = it
+        }
+
+
 
         view.findViewById<ImageButton>(R.id.button_route_search).setOnClickListener {
-            requireActivity().onBackPressed()
+            detailFragmentViewStateListener?.routeSearch()
         }
     }
 
@@ -94,31 +115,41 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onDestroy()
     }
 
+    interface DetailFragmentViewStateListener {
+        fun routeSearch()
+        fun toggleBookmark(item: Pair<Document, Boolean>)
+    }
 
     companion object {
 
         private const val KEY_ITEM = "key_item"
+        private const val KEY_LIKE = "key_like"
 
-        fun newInstance(item: com.example.aroundgym.data.model.Document) = DetailFragment().apply {
+        fun newInstance(
+            item: Pair<Document, Boolean>,
+            listener: DetailFragmentViewStateListener
+        ) = DetailFragment().apply {
+            detailFragmentViewStateListener = listener
             arguments =
                 Bundle().apply {
                     putParcelable(
                         KEY_ITEM,
-                        com.example.aroundgym.data.model.Document(
-                            authors = item.authors,
-                            contents = item.contents,
-                            datetime = item.datetime,
-                            isbn = item.isbn,
-                            price = item.price,
-                            publisher = item.publisher,
-                            sale_price = item.sale_price,
-                            status = item.status,
-                            thumbnail = item.thumbnail,
-                            title = item.title,
-                            translators = item.translators,
-                            url = item.url
+                        Document(
+                            authors = item.first.authors,
+                            contents = item.first.contents,
+                            datetime = item.first.datetime,
+                            isbn = item.first.isbn,
+                            price = item.first.price,
+                            publisher = item.first.publisher,
+                            sale_price = item.first.sale_price,
+                            status = item.first.status,
+                            thumbnail = item.first.thumbnail,
+                            title = item.first.title,
+                            translators = item.first.translators,
+                            url = item.first.url
                         )
                     )
+                    putBoolean(KEY_LIKE, item.second)
                 }
         }
 

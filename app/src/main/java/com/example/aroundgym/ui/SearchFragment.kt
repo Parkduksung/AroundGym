@@ -1,13 +1,14 @@
-package com.example.aroundgym
+package com.example.aroundgym.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.example.aroundgym.manager.MainViewStateManager
+import com.example.aroundgym.R
 import com.example.aroundgym.data.model.Document
 
 class SearchFragment : Fragment(R.layout.fragment_search) {

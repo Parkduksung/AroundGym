@@ -1,8 +1,9 @@
-package com.example.aroundgym
+package com.example.aroundgym.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
+import com.example.aroundgym.R
 import com.example.aroundgym.data.model.Document
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {

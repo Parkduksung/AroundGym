@@ -1,6 +1,6 @@
 package com.example.aroundgym.data.source
 
-import com.example.aroundgym.ApiSearchBook
+import com.example.aroundgym.api.ApiSearchBook
 import com.example.aroundgym.data.model.KakaoSearchBookResponse
 
 class KAKAORemoteDataSourceImpl : KAKAORemoteDataSource {

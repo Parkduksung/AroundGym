@@ -1,4 +1,4 @@
-package com.example.aroundgym
+package com.example.aroundgym.api
 
 import com.example.aroundgym.data.model.*
 import org.json.JSONException

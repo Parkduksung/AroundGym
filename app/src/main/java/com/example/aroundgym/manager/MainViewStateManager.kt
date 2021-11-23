@@ -1,4 +1,4 @@
-package com.example.aroundgym
+package com.example.aroundgym.manager
 
 import com.example.aroundgym.data.model.Document
 import com.example.aroundgym.util.InjectUtil

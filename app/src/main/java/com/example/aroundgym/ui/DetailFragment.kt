@@ -1,4 +1,4 @@
-package com.example.aroundgym
+package com.example.aroundgym.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.aroundgym.R
 import com.example.aroundgym.data.model.Document
 import com.example.aroundgym.util.ImageUtil
 

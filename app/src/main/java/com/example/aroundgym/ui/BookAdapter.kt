@@ -1,4 +1,4 @@
-package com.example.aroundgym
+package com.example.aroundgym.ui
 
 import android.os.Looper
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.aroundgym.R
 import com.example.aroundgym.data.model.Document
 import com.example.aroundgym.util.ImageUtil
 

@@ -105,6 +105,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     override fun onDetach() {
         super.onDetach()
+        detailFragmentViewStateListener = null
     }
 
     override fun onDestroyView() {

@@ -2,6 +2,7 @@ package com.example.aroundgym
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.example.aroundgym.data.model.Document
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -43,12 +44,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             .add(
                 R.id.container_main,
                 DetailFragment.newInstance(item, detailFragmentViewStateListener),
-                "detail"
+                "details"
             ).addToBackStack("details").commit()
     }
 
     private fun _routeSearch() {
-        super.onBackPressed()
+        supportFragmentManager.popBackStack("details", FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
 }

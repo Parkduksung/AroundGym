@@ -1,6 +1,6 @@
 package com.example.aroundgym.api.response
 
-import com.example.kakaopay.data.model.BookItem
+import com.example.aroundgym.data.model.BookItem
 import com.google.gson.annotations.SerializedName
 
 data class KakaoSearchBookResponse(

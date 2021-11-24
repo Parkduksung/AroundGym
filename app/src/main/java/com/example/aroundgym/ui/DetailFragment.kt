@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.example.aroundgym.BR
 import com.example.aroundgym.R
 import com.example.aroundgym.base.BaseFragment
 import com.example.aroundgym.base.ViewState

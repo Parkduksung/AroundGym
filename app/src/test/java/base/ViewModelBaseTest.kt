@@ -1,7 +1,8 @@
 package base
 
-import androidx.constraintlayout.motion.utils.ViewState
+
 import androidx.lifecycle.Observer
+import com.example.aroundgym.base.ViewState
 import org.mockito.Mock
 
 

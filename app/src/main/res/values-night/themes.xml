@@ -14,5 +14,5 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <color name="background">@android:color/background_dark</color>
+    <color name="baseBackground">@android:color/background_dark</color>
 </resources>
